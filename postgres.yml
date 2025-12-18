@@ -1,0 +1,18 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: local_postgres
+    restart: unless-stopped
+    command: postgres -c logging_collector=on -c log_destination=stderr -c log_directory=/var/lib/postgresql/data/log -c log_min_messages=info -c log_statement=all
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Kolkata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

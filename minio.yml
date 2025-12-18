@@ -1,0 +1,16 @@
+services:
+  minio:
+    container_name: minio
+    image: quay.io/minio/minio:RELEASE.2025-04-22T22-12-26Z
+    command: server /data --console-address ":9090"
+    ports:
+      - 9000:9000
+      - 9090:9090
+    volumes:
+      - ./minio/data:/data
+    env_file:
+      - ./minio/.env
+
+volumes:
+  minio_data:
+    driver: local
