@@ -1,3 +1,5 @@
+name: composes
+
 version: '3'
 services:
   coturn_server:

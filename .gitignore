@@ -1,0 +1,6 @@
+postgres/data/
+mysql/data/
+redis/data/
+minio/data/
+
+
