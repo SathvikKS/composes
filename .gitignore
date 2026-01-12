@@ -1,6 +1,6 @@
-postgres/data/
-mysql/data/
-redis/data/
-minio/data/
-
+postgres
+mysql/
+redis/
+minio/
+mongodb/
 

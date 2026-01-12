@@ -1,0 +1,16 @@
+name: composes
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: local_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: admin
+      TZ: Asia/Kolkata
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb/data:/data/db
