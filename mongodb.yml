@@ -2,7 +2,7 @@ name: composes
 
 services:
   mongodb:
-    image: mongo:7
+    image: mongo:latest
     container_name: local_mongodb
     restart: unless-stopped
     environment:
