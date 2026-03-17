@@ -1,9 +1,9 @@
 name: composes
 
 services:
-  postgres:
-    image: postgres:18.3
-    container_name: local_postgres
+  postgis:
+    image: postgis/postgis:18-3.6
+    container_name: local_postgis
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
