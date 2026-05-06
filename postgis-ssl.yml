@@ -1,0 +1,35 @@
+name: composes
+
+services:
+  postgis_ssl:
+    build:
+      context: ./postgis_build
+      dockerfile: Dockerfile
+    container_name: local_postgis_ssl
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres 
+      TZ: Asia/Kolkata
+    ports:
+      - "5433:5432"
+    # TLS + SCRAM + client cert (pg_hba: hostssl … scram-sha-256 clientcert=verify-ca). See postgis_build/generate-ssl-certs.sh
+    command:
+      - postgres
+      - -c
+      - ssl=on
+      - -c
+      - ssl_cert_file=/etc/ssl/postgres/server-cert.pem
+      - -c
+      - ssl_key_file=/etc/ssl/postgres/server-key.pem
+      - -c
+      - ssl_ca_file=/etc/ssl/postgres/server-ca.pem
+      - -c
+      - ssl_min_protocol_version=TLSv1.2
+    volumes:
+      # 18+ uses version-specific subdirs under /var/lib/postgresql (see docker-library/postgres#1259)
+      - ./postgis_ssl/data:/var/lib/postgresql
+      - ./postgis_ssl/ssl:/etc/ssl/postgres:ro
+      # Runs only when data dir is first initialized
+      - ./postgis_build/initdb-ssl:/docker-entrypoint-initdb.d:ro
+

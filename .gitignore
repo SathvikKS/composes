@@ -4,3 +4,4 @@ redis/
 minio/
 mongodb/
 postgis/
+postgis_ssl/
