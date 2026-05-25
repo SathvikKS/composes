@@ -163,8 +163,19 @@ Certs must exist **before** `up`, because Postgres starts with `ssl=on` and read
 
 From the repo root:
 
+**macOS / Linux**
 ```bash
 bash postgis_build/generate-ssl-certs.sh
+```
+
+**Windows (PowerShell)**
+```powershell
+powershell -ExecutionPolicy Bypass -File .\postgis_build\generate-ssl-certs.ps1
+```
+
+If you see `openssl` not found, install it and reopen your terminal:
+```powershell
+winget install --id ShiningLight.OpenSSL.Light -e
 ```
 
 This writes (under `postgis_ssl/ssl/`):
