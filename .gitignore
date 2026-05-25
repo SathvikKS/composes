@@ -5,3 +5,4 @@ minio/
 mongodb/
 postgis/
 postgis_ssl/
+mssql
