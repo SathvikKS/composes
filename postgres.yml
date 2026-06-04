@@ -2,16 +2,16 @@ name: composes
 
 services:
   postgres:
-    image: postgres:18.3
+    build:
+      context: ./postgres_build
     container_name: local_postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres 
+      POSTGRES_PASSWORD: postgres
       TZ: Asia/Kolkata
     ports:
       - "5432:5432"
     volumes:
       # 18+ uses version-specific subdirs under /var/lib/postgresql (see docker-library/postgres#1259)
       - ./postgres/data:/var/lib/postgresql
-
