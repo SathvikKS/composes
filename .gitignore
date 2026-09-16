@@ -7,3 +7,6 @@ postgis/
 postgis_ssl/
 mssql
 portainer/
+netbird/data/
+netbird/config.yaml
+netbird/dashboard.env

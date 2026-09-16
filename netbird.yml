@@ -1,0 +1,39 @@
+services:
+    netbird-dashboard:
+        image: netbirdio/dashboard:latest
+        container_name: netbird-dashboard
+        restart: unless-stopped
+        networks: [netbird]
+        ports:
+            - '7080:80'
+        env_file:
+            - ./netbird/dashboard.env
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "5m"
+                max-file: "2"
+
+    netbird-server:
+        image: netbirdio/netbird-server:latest
+        container_name: netbird-server
+        restart: unless-stopped
+        networks: [netbird]
+        ports:
+            - '8443:443'
+            - '3478:3478/udp'
+        volumes:
+            - ./netbird/data:/var/lib/netbird
+            - ./netbird/config.yaml:/etc/netbird/config.yaml
+        command: ["--config", "/etc/netbird/config.yaml"]
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "5m"
+                max-file: "2"
+
+networks:
+    netbird:
+        external: false
